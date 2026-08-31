@@ -54,7 +54,7 @@
           <p style="margin-top: 16px;" data-i18n="about.p2">
             {!! $sections['about']->content_i18n['p2']['es'] ?? '' !!}
           </p>
-          <div style="margin-top: 24px;">
+          <div class="about-actions">
             <a href="{{ $sections['about']->content_i18n['linkedin_url'] ?? 'https://www.linkedin.com/in/bryanarrivasplata' }}" target="_blank" class="btn btn-primary" style="padding: 10px 24px;">
               <i class="fab fa-linkedin"></i> <span data-i18n="about.linkedin">{{ $sections['about']->content_i18n['linkedin_label']['es'] ?? 'LinkedIn' }}</span>
             </a>
