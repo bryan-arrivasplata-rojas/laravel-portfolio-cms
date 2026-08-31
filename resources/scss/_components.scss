@@ -1,0 +1,271 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border-radius: 40px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+  background: transparent;
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  white-space: nowrap;
+
+  &-primary {
+    background: var(--accent);
+    color: var(--primary);
+    border: none;
+    &:hover {
+      background: var(--accent-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(240, 180, 41, 0.3);
+    }
+  }
+
+  &-outline:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--accent);
+  }
+}
+body.light-mode .btn-outline:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.ctrl-btn {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-muted-color);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: var(--transition);
+  background: var(--card-bg);
+  flex-shrink: 0;
+
+  &:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(240, 180, 41, 0.15);
+  }
+  i { pointer-events: none; }
+}
+
+.scroll-top {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 999;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--primary);
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(240, 180, 41, 0.4);
+  transition: var(--transition);
+  opacity: 0;
+  transform: translateY(80px);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+  }
+  &:hover {
+    background: var(--accent-light);
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 8px 28px rgba(240, 180, 41, 0.5);
+    i { transform: translateY(-2px); }
+  }
+  i { transition: var(--transition); }
+}
+
+.stat-card {
+  background: var(--card-bg);
+  padding: 20px 12px;
+  border-radius: var(--radius);
+  text-align: center;
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(4px);
+  transition: var(--transition);
+  &:hover {
+    transform: translateY(-6px);
+    border-color: var(--accent);
+  }
+  .number {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 2rem;
+    color: var(--accent);
+  }
+  .label {
+    font-size: 0.85rem;
+    color: var(--text-muted-color);
+    margin-top: 4px;
+    word-break: break-word;
+  }
+}
+
+.exp-item {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  border-left: 4px solid var(--accent);
+  transition: var(--transition);
+  backdrop-filter: blur(4px);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  &:hover {
+    transform: translateX(4px);
+    border-color: var(--accent-light);
+    box-shadow: var(--shadow);
+  }
+  .exp-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 10px;
+    h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text-color);
+      word-break: break-word;
+    }
+    .company {
+      color: var(--accent);
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+    .date {
+      color: var(--text-muted-color);
+      font-size: 0.85rem;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 3px 12px;
+      border-radius: 20px;
+      border: 1px solid var(--border-color);
+      white-space: nowrap;
+    }
+  }
+  .exp-desc {
+    color: var(--text-muted-color);
+    font-size: 0.95rem;
+    padding-left: 0;
+    list-style: none;
+    li {
+      position: relative;
+      padding-left: 22px;
+      margin-bottom: 6px;
+      word-break: break-word;
+      &::before {
+        content: '▹';
+        position: absolute;
+        left: 0;
+        color: var(--accent);
+        font-weight: 700;
+      }
+    }
+  }
+}
+body.light-mode .exp-header .date {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.skill-tag {
+  background: var(--card-bg);
+  padding: 6px 16px;
+  border-radius: 30px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  transition: var(--transition);
+  cursor: default;
+  word-break: break-word;
+  &:hover {
+    background: rgba(240, 180, 41, 0.15);
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-2px);
+  }
+  i {
+    margin-right: 6px;
+    color: var(--accent);
+  }
+}
+
+.cert-card {
+  background: var(--card-bg);
+  padding: 18px 14px;
+  border-radius: var(--radius);
+  text-align: center;
+  border: 1px solid var(--border-color);
+  transition: var(--transition);
+  backdrop-filter: blur(4px);
+  &:hover {
+    transform: translateY(-6px);
+    border-color: var(--accent);
+    box-shadow: var(--shadow);
+  }
+  i {
+    font-size: 2rem;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .cert-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    word-break: break-word;
+  }
+  .cert-org {
+    font-size: 0.75rem;
+    color: var(--text-muted-color);
+    margin-top: 4px;
+  }
+  .cert-date {
+    font-size: 0.7rem;
+    color: var(--text-muted-color);
+    margin-top: 2px;
+  }
+}
+
+.contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--card-bg);
+  padding: 12px 22px;
+  border-radius: 40px;
+  border: 1px solid var(--border-color);
+  font-weight: 500;
+  transition: var(--transition);
+  color: var(--text-color);
+  font-size: 0.9rem;
+  word-break: break-word;
+  cursor: pointer;
+  &:hover {
+    background: rgba(240, 180, 41, 0.1);
+    border-color: var(--accent);
+    transform: translateY(-3px);
+  }
+  i {
+    font-size: 1.2rem;
+    color: var(--accent);
+  }
+}

@@ -1,0 +1,38 @@
+:root {
+  --primary: #0b1a2e;
+  --secondary: #112b45;
+  --accent: #f0b429;
+  --accent-light: #fad87a;
+  --text-light: #e8edf5;
+  --text-muted: #9bb0c9;
+  --bg-card: rgba(255, 255, 255, 0.05);
+  --border-glow: rgba(240, 180, 41, 0.25);
+  --shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.6);
+  --radius: 20px;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --bg-body: var(--primary);
+  --bg-section-alt: var(--secondary);
+  --text-color: var(--text-light);
+  --text-muted-color: var(--text-muted);
+  --card-bg: var(--bg-card);
+  --border-color: rgba(255, 255, 255, 0.05);
+  --nav-bg: rgba(11, 26, 46, 0.85);
+  --nav-border: rgba(255, 255, 255, 0.05);
+}
+
+body.light-mode {
+  --primary: #f5f7fa;
+  --secondary: #e9edf2;
+  --text-light: #1a1f2e;
+  --text-muted: #3d4a5c;
+  --bg-card: rgba(0, 0, 0, 0.03);
+  --bg-body: var(--primary);
+  --bg-section-alt: var(--secondary);
+  --text-color: var(--text-light);
+  --text-muted-color: var(--text-muted);
+  --card-bg: rgba(255, 255, 255, 0.7);
+  --border-color: rgba(0, 0, 0, 0.08);
+  --nav-bg: rgba(245, 247, 250, 0.92);
+  --nav-border: rgba(0, 0, 0, 0.06);
+  --shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.15);
+}
