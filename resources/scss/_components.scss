@@ -1,37 +1,86 @@
 .btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   padding: 12px 28px;
   border-radius: 40px;
   font-weight: 600;
   font-size: 0.95rem;
-  border: none;
   cursor: pointer;
   transition: var(--transition);
   background: transparent;
   color: var(--text-color);
   border: 1px solid var(--border-color);
   white-space: nowrap;
+  text-decoration: none;
+
+  i {
+    transition: var(--transition);
+    font-size: 1rem;
+    color: inherit;
+  }
 
   &-primary {
     background: var(--accent);
-    color: var(--primary);
-    border: none;
+    color: #0b1a2e; /* Contraste oscuro garantizado siempre sobre fondo amarillo */
+    border: 1px solid var(--accent);
+
+    i {
+      color: #0b1a2e;
+    }
+
     &:hover {
       background: var(--accent-light);
+      border-color: var(--accent-light);
+      color: #071322; /* Texto nítido y legible en hover */
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(240, 180, 41, 0.3);
+      box-shadow: 0 8px 24px rgba(240, 180, 41, 0.35);
+
+      i {
+        color: #071322;
+      }
     }
   }
 
-  &-outline:hover {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: var(--accent);
+  &-outline {
+    background: transparent;
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+
+    i {
+      color: var(--accent);
+    }
+
+    &:hover {
+      background: rgba(240, 180, 41, 0.1);
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+
+      i {
+        color: var(--accent);
+      }
+    }
   }
 }
-body.light-mode .btn-outline:hover {
-  background: rgba(0, 0, 0, 0.05);
+
+body.light-mode {
+  .btn-primary {
+    color: #0b1a2e;
+    i { color: #0b1a2e; }
+
+    &:hover {
+      color: #000000;
+      i { color: #000000; }
+    }
+  }
+
+  .btn-outline:hover {
+    background: rgba(240, 180, 41, 0.12);
+    border-color: var(--accent);
+    color: #1a1f2e;
+  }
 }
 
 .ctrl-btn {
@@ -68,7 +117,7 @@ body.light-mode .btn-outline:hover {
   height: 48px;
   border-radius: 50%;
   background: var(--accent);
-  color: var(--primary);
+  color: #0b1a2e;
   border: none;
   font-size: 1.3rem;
   cursor: pointer;
@@ -88,9 +137,10 @@ body.light-mode .btn-outline:hover {
   }
   &:hover {
     background: var(--accent-light);
+    color: #071322;
     transform: translateY(-4px) scale(1.05);
     box-shadow: 0 8px 28px rgba(240, 180, 41, 0.5);
-    i { transform: translateY(-2px); }
+    i { transform: translateY(-2px); color: #071322; }
   }
   i { transition: var(--transition); }
 }
@@ -259,6 +309,7 @@ body.light-mode .exp-header .date {
   font-size: 0.9rem;
   word-break: break-word;
   cursor: pointer;
+  text-decoration: none;
   &:hover {
     background: rgba(240, 180, 41, 0.1);
     border-color: var(--accent);
