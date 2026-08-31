@@ -83,3 +83,8 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::delete('/media/{id}', [MediaController::class, 'destroy'])->name('media.destroy');
     Route::post('/media/{id}/restore', [MediaController::class, 'restore'])->name('media.restore');
 });
+
+// Captura de rutas inexistentes: Redirige automáticamente al Home (302/301)
+Route::fallback(function () {
+    return redirect()->route('home');
+});

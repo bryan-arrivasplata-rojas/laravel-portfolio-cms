@@ -13,10 +13,20 @@ use Illuminate\Http\Response;
 class SeoController extends Controller
 {
     /**
+     * Obtener la URL base canónica dinámica respetando la configuración de la app
+     */
+    private function getBaseUrl(): string
+    {
+        return rtrim(config('app.url', url('/')), '/');
+    }
+
+    /**
      * Generador dinámico de Sitemap XML (Ruta principal + URLs adicionales)
      */
     public function sitemap(): Response
     {
+        $baseUrl = $this->getBaseUrl();
+
         $sectionDate = Section::whereNotNull('updated_at')->max('updated_at');
         $settingDate = SiteSetting::whereNotNull('updated_at')->max('updated_at');
 
@@ -30,15 +40,15 @@ class SeoController extends Controller
         $content = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
         $content .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">' . "\n";
         
-        // URL Principal
+        // URL Principal Dinámica
         $content .= "  <url>\n";
-        $content .= "    <loc>" . url('/') . "</loc>\n";
+        $content .= "    <loc>" . $baseUrl . "/</loc>\n";
         $content .= "    <lastmod>" . $lastMod . "</lastmod>\n";
         $content .= "    <changefreq>weekly</changefreq>\n";
         $content .= "    <priority>1.0</priority>\n";
-        $content .= '    <xhtml:link rel="alternate" hreflang="es" href="' . url('/') . '" />' . "\n";
-        $content .= '    <xhtml:link rel="alternate" hreflang="en" href="' . url('/') . '" />' . "\n";
-        $content .= '    <xhtml:link rel="alternate" hreflang="x-default" href="' . url('/') . '" />' . "\n";
+        $content .= '    <xhtml:link rel="alternate" hreflang="es" href="' . $baseUrl . '/" />' . "\n";
+        $content .= '    <xhtml:link rel="alternate" hreflang="en" href="' . $baseUrl . '/" />' . "\n";
+        $content .= '    <xhtml:link rel="alternate" hreflang="x-default" href="' . $baseUrl . '/" />' . "\n";
         $content .= "  </url>\n";
 
         // Procesar URLs adicionales configuradas desde el CMS
@@ -48,7 +58,7 @@ class SeoController extends Controller
         foreach ($extraLines as $line) {
             $line = trim($line);
             if (!empty($line)) {
-                $fullUrl = str_starts_with($line, 'http') ? $line : url($line);
+                $fullUrl = str_starts_with($line, 'http') ? $line : $baseUrl . '/' . ltrim($line, '/');
                 $content .= "  <url>\n";
                 $content .= "    <loc>" . htmlspecialchars($fullUrl) . "</loc>\n";
                 $content .= "    <lastmod>" . $lastMod . "</lastmod>\n";
@@ -70,13 +80,14 @@ class SeoController extends Controller
      */
     public function robots(): Response
     {
+        $baseUrl = $this->getBaseUrl();
         $robotsSetting = SiteSetting::where('key', 'seo_robots_content')->first();
         
         $defaultRobots = "User-agent: *\nAllow: /\nDisallow: /admin\nDisallow: /admin/*\n\nUser-agent: GPTBot\nAllow: /\n\nUser-agent: ChatGPT-User\nAllow: /\n\nUser-agent: Claude-Web\nAllow: /\n\nUser-agent: PerplexityBot\nAllow: /\n\nUser-agent: Google-Extended\nAllow: /";
         
         $body = !empty($robotsSetting->value_i18n['value']) ? trim($robotsSetting->value_i18n['value']) : $defaultRobots;
 
-        $content = $body . "\n\nSitemap: " . url('/sitemap.xml') . "\n";
+        $content = $body . "\n\nSitemap: " . $baseUrl . "/sitemap.xml\n";
 
         return response($content, 200, [
             'Content-Type' => 'text/plain; charset=utf-8'
@@ -88,6 +99,7 @@ class SeoController extends Controller
      */
     public function llms(): Response
     {
+        $baseUrl = $this->getBaseUrl();
         $llmsSetting = SiteSetting::where('key', 'seo_llms_summary')->first();
         $authorSetting = SiteSetting::where('key', 'seo_author')->first();
 
@@ -105,7 +117,7 @@ class SeoController extends Controller
         $markdown .= "- **Título:** Ingeniero de Sistemas por la Universidad Nacional de Ingeniería (UNI)\n";
         $markdown .= "- **Puesto Actual:** Senior Backend Engineer en Bluetab, an IBM Company (BBVA)\n";
         $markdown .= "- **Ubicación:** Lima, Perú\n";
-        $markdown .= "- **Website Oficial:** " . url('/') . "\n";
+        $markdown .= "- **Website Oficial:** " . $baseUrl . "\n";
         $markdown .= "- **LinkedIn:** https://www.linkedin.com/in/bryanarrivasplata\n";
         $markdown .= "- **GitHub:** https://github.com/bryan-arrivasplata-rojas\n\n";
 

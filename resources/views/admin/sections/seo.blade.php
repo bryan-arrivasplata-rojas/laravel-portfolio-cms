@@ -13,23 +13,37 @@
 
         <div class="form-grid">
             <div class="form-group">
-                <label>Meta Título (Español - Recomendado: 50-60 caracteres)</label>
-                <input type="text" name="seo_meta_title_es" class="form-control" value="{{ $settings['seo_meta_title']->value_i18n['es'] ?? '' }}" required>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <label>Meta Título (Español)</label>
+                    <small id="titleEsCounter" style="font-weight: 600; color: #9bb0c9;">0 / 58 caracteres</small>
+                </div>
+                <input type="text" name="seo_meta_title_es" id="seo_meta_title_es" class="form-control" value="{{ $settings['seo_meta_title']->value_i18n['es'] ?? '' }}" maxlength="70" required oninput="updateCharCount('seo_meta_title_es', 'titleEsCounter', 58)">
+                <small style="color: #9bb0c9;">Recomendado: 50 a 58 caracteres para evitar truncamiento en Google.</small>
             </div>
             <div class="form-group">
-                <label>Meta Título (Inglés)</label>
-                <input type="text" name="seo_meta_title_en" class="form-control" value="{{ $settings['seo_meta_title']->value_i18n['en'] ?? '' }}" required>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <label>Meta Título (Inglés)</label>
+                    <small id="titleEnCounter" style="font-weight: 600; color: #9bb0c9;">0 / 58 caracteres</small>
+                </div>
+                <input type="text" name="seo_meta_title_en" id="seo_meta_title_en" class="form-control" value="{{ $settings['seo_meta_title']->value_i18n['en'] ?? '' }}" maxlength="70" required oninput="updateCharCount('seo_meta_title_en', 'titleEnCounter', 58)">
             </div>
         </div>
 
         <div class="form-grid">
             <div class="form-group">
-                <label>Meta Descripción (Español - Recomendado: 140-160 caracteres)</label>
-                <textarea name="seo_meta_description_es" class="form-control" rows="3" required>{{ $settings['seo_meta_description']->value_i18n['es'] ?? '' }}</textarea>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <label>Meta Descripción (Español)</label>
+                    <small id="descEsCounter" style="font-weight: 600; color: #9bb0c9;">0 / 155 caracteres</small>
+                </div>
+                <textarea name="seo_meta_description_es" id="seo_meta_description_es" class="form-control" rows="3" maxlength="170" required oninput="updateCharCount('seo_meta_description_es', 'descEsCounter', 155)">{{ $settings['seo_meta_description']->value_i18n['es'] ?? '' }}</textarea>
+                <small style="color: #9bb0c9;">Recomendado: 140 a 155 caracteres para asegurar el snippet completo.</small>
             </div>
             <div class="form-group">
-                <label>Meta Descripción (Inglés)</label>
-                <textarea name="seo_meta_description_en" class="form-control" rows="3" required>{{ $settings['seo_meta_description']->value_i18n['en'] ?? '' }}</textarea>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <label>Meta Descripción (Inglés)</label>
+                    <small id="descEnCounter" style="font-weight: 600; color: #9bb0c9;">0 / 155 caracteres</small>
+                </div>
+                <textarea name="seo_meta_description_en" id="seo_meta_description_en" class="form-control" rows="3" maxlength="170" required oninput="updateCharCount('seo_meta_description_en', 'descEnCounter', 155)">{{ $settings['seo_meta_description']->value_i18n['en'] ?? '' }}</textarea>
             </div>
         </div>
 
@@ -69,20 +83,20 @@
         <div class="form-group">
             <label><strong>Directivas de robots.txt:</strong> (Puedes modificar qué rutas bloquear o qué bots de búsqueda permitir)</label>
             <textarea name="seo_robots_content" class="form-control" rows="8" style="font-family: monospace; font-size: 0.88rem; background: #071322; color: #38ef7d;">{{ $settings['seo_robots_content']->value_i18n['value'] ?? "User-agent: *\nAllow: /\nDisallow: /admin\nDisallow: /admin/*\n\nUser-agent: GPTBot\nAllow: /\n\nUser-agent: Claude-Web\nAllow: /\n\nUser-agent: PerplexityBot\nAllow: /" }}</textarea>
-            <small style="color: #9bb0c9; display: block; margin-top: 4px;">Nota: La directiva <code>Sitemap: ...</code> se añade automáticamente al final.</small>
+            <small style="color: #9bb0c9; display: block; margin-top: 4px;">Nota: La directiva <code>Sitemap: https://bryanarrivasplata.com/sitemap.xml</code> se añade automáticamente al final.</small>
         </div>
 
         <div class="form-group" style="margin-top: 20px;">
             <label><strong>URLs Adicionales para el Sitemap XML:</strong> (Agrega una ruta o URL por línea para que se indexen a futuro)</label>
             <textarea name="seo_sitemap_extra_urls" class="form-control" rows="4" placeholder="/proyectos&#10;/blog&#10;https://bryanarrivasplata.com/otra-pagina" style="font-family: monospace; font-size: 0.88rem;">{{ $settings['seo_sitemap_extra_urls']->value_i18n['value'] ?? '' }}</textarea>
-            <small style="color: #9bb0c9; display: block; margin-top: 4px;">La página principal (<code>/</code>) ya está incluida por defecto con prioridad máxima (1.0). Coloca aquí rutas secundarias cuando crees nuevas secciones.</small>
+            <small style="color: #9bb0c9; display: block; margin-top: 4px;">La página principal (<code>https://bryanarrivasplata.com</code>) ya está incluida con prioridad 1.0.</small>
         </div>
 
         <div class="form-grid" style="margin-top: 20px;">
             <div class="form-group">
                 <label><strong>Resumen Profesional para IAs (llms.txt - Español):</strong></label>
                 <textarea name="seo_llms_summary_es" class="form-control" rows="4">{{ $settings['seo_llms_summary']->value_i18n['es'] ?? 'Senior Backend Engineer especializado en Core Banking, Arquitectura APX (Online/Batch), Microservicios y Sistemas Financieros de Alta Transaccionalidad.' }}</textarea>
-                <small style="color: #9bb0c9;">Es el texto principal que ChatGPT y Perplexity citarán cuando busquen tu perfil.</small>
+                <small style="color: #9bb0c9;">Texto principal para modelos LLM y motores de búsqueda generativos.</small>
             </div>
             <div class="form-group">
                 <label><strong>Resumen Profesional para IAs (llms.txt - Inglés):</strong></label>
@@ -97,4 +111,28 @@
         </button>
     </div>
 </form>
+
+<script>
+function updateCharCount(inputId, counterId, recommended) {
+    const input = document.getElementById(inputId);
+    const counter = document.getElementById(counterId);
+    if (!input || !counter) return;
+    
+    const len = input.value.length;
+    counter.textContent = `${len} / ${recommended} caracteres`;
+    
+    if (len > recommended) {
+        counter.style.color = '#f56565';
+    } else {
+        counter.style.color = '#38ef7d';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    updateCharCount('seo_meta_title_es', 'titleEsCounter', 58);
+    updateCharCount('seo_meta_title_en', 'titleEnCounter', 58);
+    updateCharCount('seo_meta_description_es', 'descEsCounter', 155);
+    updateCharCount('seo_meta_description_en', 'descEnCounter', 155);
+});
+</script>
 @endsection

@@ -1,14 +1,17 @@
 @php
-    $siteTitle = $settings['seo_meta_title']->value_i18n['es'] ?? ($settings['site_name']->value_i18n['es'] ?? 'Bryan Arrivasplata · Senior Backend Engineer');
-    $siteDescription = $settings['seo_meta_description']->value_i18n['es'] ?? 'Ingeniero de Sistemas especializado en Core Banking, APX, microservicios y sistemas financieros de alta transaccionalidad.';
-    $siteKeywords = $settings['seo_meta_keywords']->value_i18n['value'] ?? 'Bryan Arrivasplata, Backend Engineer, Java Spring Boot, Core Banking, BBVA';
+    $defaultTitle = 'Bryan Arrivasplata · Senior Backend & Core Banking Engineer';
+    $siteTitle = $settings['seo_meta_title']->value_i18n['es'] ?? ($settings['site_name']->value_i18n['es'] ?? $defaultTitle);
+    
+    $defaultDescription = 'Ingeniero de Sistemas UNI y Senior Backend Engineer. Especialista en arquitectura Core Banking, microservicios Java/Spring Boot y alta transaccionalidad.';
+    $siteDescription = $settings['seo_meta_description']->value_i18n['es'] ?? $defaultDescription;
+    
+    $siteKeywords = $settings['seo_meta_keywords']->value_i18n['value'] ?? 'Bryan Arrivasplata, Backend Engineer, Java Spring Boot, Core Banking, Microservicios';
     $siteAuthor = $settings['seo_author']->value_i18n['value'] ?? 'Bryan Daniell Arrivasplata Rojas';
     
     $ogImgRaw = $settings['seo_og_image']->value_i18n['value'] ?? ($settings['profile_avatar']->value_i18n['value'] ?? 'images/bryan.webp');
     $ogImage = str_starts_with($ogImgRaw, 'http') ? $ogImgRaw : asset($ogImgRaw);
-    $canonicalUrl = url()->current();
+    $canonicalUrl = 'https://bryanarrivasplata.com';
 
-    // Preparar lista de habilidades para Schema.org JSON-LD
     $skillsList = [];
     foreach ($skillCategories as $cat) {
         foreach ($cat->skills as $sk) {
@@ -16,7 +19,6 @@
         }
     }
 
-    // Preparar lista de credenciales para Schema.org JSON-LD de forma 100% segura en PHP
     $credentialsList = [];
     foreach ($certifications as $cert) {
         $credentialsList[] = [
@@ -100,7 +102,10 @@
   <meta name="keywords" content="{{ $siteKeywords }}" />
   <meta name="author" content="{{ $siteAuthor }}" />
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  
   <link rel="canonical" href="{{ $canonicalUrl }}" />
+  <link rel="alternate" hreflang="es" href="{{ $canonicalUrl }}" />
+  <link rel="alternate" hreflang="x-default" href="{{ $canonicalUrl }}" />
 
   <meta name="geo.region" content="PE-LIM" />
   <meta name="geo.placename" content="Lima, Peru" />
@@ -133,10 +138,14 @@
   <link rel="apple-touch-icon" href="{{ $ogImage }}">
   <meta name="theme-color" content="#0b1a2e">
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-
+  <!-- Preconnect para acelerar descargas de CDN externas -->
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" /></noscript>
+
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet" />
 
   @vite(['resources/scss/app.scss', 'resources/js/app.js'])
@@ -147,8 +156,8 @@
 
   <script>
     window.__PORTFOLIO_TRANSLATIONS__ = @json($translations);
-    window.__SITE_NAME_ES__ = "{{ $settings['seo_meta_title']->value_i18n['es'] ?? ($settings['site_name']->value_i18n['es'] ?? 'Bryan Arrivasplata · Senior Backend Engineer') }}";
-    window.__SITE_NAME_EN__ = "{{ $settings['seo_meta_title']->value_i18n['en'] ?? ($settings['site_name']->value_i18n['en'] ?? 'Bryan Arrivasplata · Senior Backend Engineer') }}";
+    window.__SITE_NAME_ES__ = "{{ $siteTitle }}";
+    window.__SITE_NAME_EN__ = "{{ $settings['seo_meta_title']->value_i18n['en'] ?? ($settings['site_name']->value_i18n['en'] ?? 'Bryan Arrivasplata · Senior Backend & Core Banking Engineer') }}";
   </script>
 </head>
 <body>

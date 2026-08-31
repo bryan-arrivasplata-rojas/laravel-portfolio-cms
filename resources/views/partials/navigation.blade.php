@@ -1,8 +1,8 @@
 <nav class="navbar" id="navbar">
   <div class="container">
-    <div class="logo">
+    <a href="#home" class="logo" aria-label="Ir al inicio - Bryan Arrivasplata">
       {{ $settings['site_logo_prefix']->value_i18n['value'] ?? 'B.' }}<span></span>{{ $settings['site_logo_suffix']->value_i18n['value'] ?? 'A.' }}<span></span>
-    </div>
+    </a>
     <ul class="nav-links" id="navLinks">
       <li><a href="#about" data-i18n="nav.about">Sobre mí</a></li>
       <li><a href="#experience" data-i18n="nav.experience">Experiencia</a></li>
@@ -17,7 +17,7 @@
       <button class="ctrl-btn" id="themeToggle" aria-label="Cambiar tema" title="Modo claro / oscuro">
         <i class="fas fa-moon"></i>
       </button>
-      <button class="nav-toggle" id="navToggle" aria-label="Menú">
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú de navegación">
         <span></span><span></span><span></span>
       </button>
     </div>

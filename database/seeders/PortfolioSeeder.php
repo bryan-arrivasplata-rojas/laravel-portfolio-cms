@@ -27,9 +27,13 @@ class PortfolioSeeder extends Seeder
         );
 
         $settings = [
+            // General
             [
                 'key' => 'site_name',
-                'value_i18n' => ['es' => 'Bryan Arrivasplata · Ingeniero de Sistemas', 'en' => 'Bryan Arrivasplata · Systems Engineer'],
+                'value_i18n' => [
+                    'es' => 'Bryan Arrivasplata · Senior Backend & Core Banking',
+                    'en' => 'Bryan Arrivasplata · Senior Backend & Core Banking'
+                ],
                 'group' => 'general',
                 'type' => 'text'
             ],
@@ -64,6 +68,67 @@ class PortfolioSeeder extends Seeder
                     'en' => '© 2026 Bryan Daniell Arrivasplata Rojas · Peru'
                 ],
                 'group' => 'general',
+                'type' => 'textarea'
+            ],
+
+            // Configuración SEO & Metadatos (Calibrados para Pixel Limit)
+            [
+                'key' => 'seo_meta_title',
+                'value_i18n' => [
+                    'es' => 'Bryan Arrivasplata · Senior Backend & Core Banking',
+                    'en' => 'Bryan Arrivasplata · Senior Backend & Core Banking'
+                ],
+                'group' => 'seo',
+                'type' => 'text'
+            ],
+            [
+                'key' => 'seo_meta_description',
+                'value_i18n' => [
+                    'es' => 'Ingeniero de Sistemas UNI y Senior Backend Engineer. Especialista en arquitectura Core Banking, microservicios Java/Spring Boot y alta transaccionalidad.',
+                    'en' => 'Systems Engineer (UNI) and Senior Backend Engineer. Specialized in Core Banking architecture, Java/Spring Boot microservices, and high concurrency.'
+                ],
+                'group' => 'seo',
+                'type' => 'textarea'
+            ],
+            [
+                'key' => 'seo_meta_keywords',
+                'value_i18n' => ['value' => 'Bryan Arrivasplata, Backend Engineer, Core Banking, Java Spring Boot, Microservicios, APX, Arquitectura Transaccional, BBVA'],
+                'group' => 'seo',
+                'type' => 'text'
+            ],
+            [
+                'key' => 'seo_author',
+                'value_i18n' => ['value' => 'Bryan Daniell Arrivasplata Rojas'],
+                'group' => 'seo',
+                'type' => 'text'
+            ],
+            [
+                'key' => 'seo_og_image',
+                'value_i18n' => ['value' => 'images/bryan.webp'],
+                'group' => 'seo',
+                'type' => 'media_path'
+            ],
+            [
+                'key' => 'seo_robots_content',
+                'value_i18n' => [
+                    'value' => "User-agent: *\nAllow: /\nDisallow: /admin\nDisallow: /admin/*\n\nUser-agent: GPTBot\nAllow: /\n\nUser-agent: ChatGPT-User\nAllow: /\n\nUser-agent: Claude-Web\nAllow: /\n\nUser-agent: PerplexityBot\nAllow: /\n\nUser-agent: Google-Extended\nAllow: /"
+                ],
+                'group' => 'seo',
+                'type' => 'textarea'
+            ],
+            [
+                'key' => 'seo_sitemap_extra_urls',
+                'value_i18n' => ['value' => ''],
+                'group' => 'seo',
+                'type' => 'textarea'
+            ],
+            [
+                'key' => 'seo_llms_summary',
+                'value_i18n' => [
+                    'es' => 'Senior Backend Engineer especializado en Core Banking, Arquitectura APX (Online/Batch), Microservicios y Sistemas Financieros de Alta Transaccionalidad.',
+                    'en' => 'Senior Backend Engineer specialized in Core Banking, APX Architecture (Online/Batch), Microservices, and High-Transactional Financial Systems.'
+                ],
+                'group' => 'seo',
                 'type' => 'textarea'
             ],
         ];

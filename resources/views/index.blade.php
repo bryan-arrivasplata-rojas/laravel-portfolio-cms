@@ -10,7 +10,7 @@
         <div class="badge-tag">
           <i class="fas fa-code"></i> <span data-i18n="hero.badge">{{ $sections['hero']->content_i18n['badge']['es'] ?? 'Backend Engineer · Core Banking' }}</span>
         </div>
-        <h1>{{ $sections['hero']->title_prefix_i18n['es'] ?? 'Bryan ' }}<span>{{ $sections['hero']->title_highlight_i18n['es'] ?? 'Arrivasplata' }}</span></h1>
+        <h1>{{ $sections['hero']->title_prefix_i18n['es'] ?? 'Bryan ' }}<span>{{ $sections['hero']->title_highlight_i18n['es'] ?? 'Arrivasplata' }}</span> · Senior Backend Engineer</h1>
         <div class="subtitle" data-i18n="hero.subtitle">{!! $sections['hero']->subtitle_i18n['es'] ?? '' !!}</div>
         <p data-i18n="hero.description">
           {{ $sections['hero']->content_i18n['description']['es'] ?? '' }}
@@ -31,7 +31,7 @@
       <div class="hero-avatar">
           <img
             src="{{ $avatarUrl }}"
-            alt="Bryan Arrivasplata"
+            alt="Bryan Arrivasplata · Senior Backend Engineer"
             loading="lazy"
           />
       </div>
@@ -54,9 +54,12 @@
           <p style="margin-top: 16px;" data-i18n="about.p2">
             {!! $sections['about']->content_i18n['p2']['es'] ?? '' !!}
           </p>
-          <div class="about-actions">
-            <a href="{{ $sections['about']->content_i18n['linkedin_url'] ?? 'https://www.linkedin.com/in/bryanarrivasplata' }}" target="_blank" class="btn btn-primary" style="padding: 10px 24px;">
+          <div class="about-actions" style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+            <a href="{{ $sections['about']->content_i18n['linkedin_url'] ?? 'https://www.linkedin.com/in/bryanarrivasplata' }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 10px 24px;">
               <i class="fab fa-linkedin"></i> <span data-i18n="about.linkedin">{{ $sections['about']->content_i18n['linkedin_label']['es'] ?? 'LinkedIn' }}</span>
+            </a>
+            <a href="#experience" class="btn btn-outline" style="padding: 10px 20px;">
+              <i class="fas fa-history"></i> <span>Ver Trayectoria</span>
             </a>
           </div>
         </div>
@@ -169,6 +172,7 @@
             href="{{ $c->url }}"
             target="{{ $c->target }}"
             class="contact-link"
+            @if($c->target === '_blank') rel="noopener noreferrer" @endif
             @if($c->copy_value) onclick="copyToClipboard('{{ $c->copy_value }}')" @endif
           >
             <i class="{{ $c->icon }}"></i>
